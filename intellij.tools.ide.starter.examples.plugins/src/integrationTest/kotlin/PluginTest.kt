@@ -13,7 +13,7 @@ import com.intellij.ide.starter.config.ConfigurationStorage
 import com.intellij.ide.starter.config.splitMode
 import com.intellij.ide.starter.driver.engine.runIdeWithDriver
 import com.intellij.ide.starter.models.IdeInfo
-import com.intellij.tools.ide.starter.build.server.idea.ultimate.IdeaUltimate
+import com.intellij.tools.ide.starter.product.idea.ultimate.IdeaUltimate
 import com.intellij.ide.starter.junit5.hyphenateWithClass
 import com.intellij.ide.starter.models.TestCase
 import com.intellij.ide.starter.plugins.PluginConfigurator
