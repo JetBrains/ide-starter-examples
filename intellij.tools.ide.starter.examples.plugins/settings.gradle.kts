@@ -1,1 +1,1 @@
-rootProject.name = "intellij.tools.ide.starter.examples.plugins"
+rootProject.name = "ide-starter-examples-plugins"
