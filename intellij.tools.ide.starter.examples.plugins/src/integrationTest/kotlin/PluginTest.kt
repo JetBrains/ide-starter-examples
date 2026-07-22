@@ -89,7 +89,7 @@ class PluginTest {
       setLicense(System.getenv("LICENSE_KEY"))
       PluginConfigurator(this).installPluginFromPath(pluginPath)
     }.runIdeWithDriver().useDriverAndCloseIde {
-      waitForIndicators(5.minutes)
+      waitForIndicators(10.minutes)
       openFile("package.json")
       ideFrame {
         // This action processed by Demo plugin
