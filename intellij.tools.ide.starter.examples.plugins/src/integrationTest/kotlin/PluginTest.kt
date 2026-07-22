@@ -86,7 +86,10 @@ class PluginTest {
                                 GitHubProject.fromGithub(branchName = "master",
                                                          repoRelativeUrl = "JetBrains/ij-perf-report-aggregator"))
     ).apply {
-      setLicense(System.getenv("LICENSE_KEY"))
+      // Only set a license when a non-blank key is provided; otherwise rely on the
+      // EAP free auto-trial (a blank key would force a "License required" modal that
+      // freezes the IDE in monolith mode).
+      System.getenv("LICENSE_KEY")?.takeIf { it.isNotBlank() }?.let { setLicense(it) }
       PluginConfigurator(this).installPluginFromPath(pluginPath)
     }.runIdeWithDriver().useDriverAndCloseIde {
       waitForIndicators(10.minutes)
