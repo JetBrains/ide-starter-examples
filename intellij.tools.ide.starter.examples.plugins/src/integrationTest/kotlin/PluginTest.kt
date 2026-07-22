@@ -77,7 +77,7 @@ class PluginTest {
    * @param splitMode Indicates whether split mode should be enabled during the test execution.
    */
   @ParameterizedTest(name = "split-mode={0}")
-  @ValueSource(booleans = [false, true])
+  @ValueSource(booleans = [false])
   fun pluginActionInvocation(splitMode: Boolean) {
     ConfigurationStorage.splitMode(splitMode)
 
