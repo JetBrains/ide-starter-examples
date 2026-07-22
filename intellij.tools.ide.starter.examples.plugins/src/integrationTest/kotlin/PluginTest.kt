@@ -1,7 +1,7 @@
 import com.intellij.driver.sdk.invokeAction
-import com.intellij.driver.sdk.openFile
 import com.intellij.driver.sdk.ui.components.UiComponent.Companion.waitFound
 import com.intellij.driver.sdk.ui.components.common.ideFrame
+import com.intellij.driver.sdk.ui.components.common.toolwindows.projectView
 import com.intellij.driver.sdk.ui.components.common.welcomeScreen
 import com.intellij.driver.sdk.ui.components.elements.button
 import com.intellij.driver.sdk.ui.components.elements.dialog
@@ -90,8 +90,16 @@ class PluginTest {
       PluginConfigurator(this).installPluginFromPath(pluginPath)
     }.runIdeWithDriver().useDriverAndCloseIde {
       waitForIndicators(10.minutes)
-      openFile("package.json")
       ideFrame {
+        // Open the file via the project tree instead of the driver's openFile,
+        // which deadlocks on the monolith path (blockingWaitForCompositeFileOpen on EDT).
+        leftToolWindowToolbar.projectButton.open()
+        projectView {
+          projectViewTree
+            .waitFound()
+            .doubleClickPath("ij-perf-report-aggregator", "package.json", fullMatch = false)
+        }
+
         // This action processed by Demo plugin
         invokeAction("ShowDialogAction", now = false)
 
