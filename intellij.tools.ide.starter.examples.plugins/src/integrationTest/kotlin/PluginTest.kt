@@ -1,7 +1,7 @@
 import com.intellij.driver.sdk.invokeAction
+import com.intellij.driver.sdk.openFile
 import com.intellij.driver.sdk.ui.components.UiComponent.Companion.waitFound
 import com.intellij.driver.sdk.ui.components.common.ideFrame
-import com.intellij.driver.sdk.ui.components.common.toolwindows.projectView
 import com.intellij.driver.sdk.ui.components.common.welcomeScreen
 import com.intellij.driver.sdk.ui.components.elements.button
 import com.intellij.driver.sdk.ui.components.elements.dialog
@@ -77,7 +77,7 @@ class PluginTest {
    * @param splitMode Indicates whether split mode should be enabled during the test execution.
    */
   @ParameterizedTest(name = "split-mode={0}")
-  @ValueSource(booleans = [false])
+  @ValueSource(booleans = [false, true])
   fun pluginActionInvocation(splitMode: Boolean) {
     ConfigurationStorage.splitMode(splitMode)
 
@@ -86,23 +86,15 @@ class PluginTest {
                                 GitHubProject.fromGithub(branchName = "master",
                                                          repoRelativeUrl = "JetBrains/ij-perf-report-aggregator"))
     ).apply {
-      // Experiment: pass null instead of an empty string. If LICENSE_KEY is empty,
-      // getenv returns "" (writes a broken idea.key -> freeze); null makes setLicense
-      // skip and fall back to the EAP auto-trial. Change ONLY this aspect.
-      setLicense(null)
+      // Only set a license when a non-blank key is provided; an empty LICENSE_KEY env
+      // var (getenv returns "" not null) would make setLicense write a broken idea.key
+      // and disable the EAP auto-trial, freezing the IDE on a "License required" modal.
+      System.getenv("LICENSE_KEY")?.takeIf { it.isNotBlank() }?.let { setLicense(it) }
       PluginConfigurator(this).installPluginFromPath(pluginPath)
     }.runIdeWithDriver().useDriverAndCloseIde {
-      waitForIndicators(10.minutes)
+      waitForIndicators(5.minutes)
+      openFile("package.json")
       ideFrame {
-        // Open the file via the project tree instead of the driver's openFile,
-        // which deadlocks on the monolith path (blockingWaitForCompositeFileOpen on EDT).
-        leftToolWindowToolbar.projectButton.open()
-        projectView {
-          projectViewTree
-            .waitFound()
-            .doubleClickPath("ij-perf-report-aggregator", "package.json", fullMatch = false)
-        }
-
         // This action processed by Demo plugin
         invokeAction("ShowDialogAction", now = false)
 

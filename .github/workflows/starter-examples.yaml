@@ -2,7 +2,7 @@ name: Build and run tests starter examples
 
 on:
   push:
-    branches: [ "main", "AT-4975" ]
+    branches: [ "main" ]
   schedule:
     - cron: "0 0 * * *"
 
