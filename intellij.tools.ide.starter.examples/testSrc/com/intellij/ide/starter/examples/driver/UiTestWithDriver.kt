@@ -42,7 +42,7 @@ class UiTestWithDriver {
         commitHash = "1dc6128c115cb41fc442c088174e81f63406fad5"
       )))
       .setupSdk(jdk21.toSdk())
-      .setLicense(System.getenv("LICENSE_KEY"))
+      .apply { System.getenv("LICENSE_KEY")?.takeIf { it.isNotBlank() }?.let { setLicense(it) } }
       .prepareProjectCleanImport()
 
     testContext.runIdeWithDriver().useDriverAndCloseIde {
