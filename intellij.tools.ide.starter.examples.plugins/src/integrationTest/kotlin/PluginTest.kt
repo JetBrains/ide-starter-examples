@@ -86,7 +86,7 @@ class PluginTest {
                                 GitHubProject.fromGithub(branchName = "master",
                                                          repoRelativeUrl = "JetBrains/ij-perf-report-aggregator"))
     ).apply {
-      setLicense(System.getenv("LICENSE_KEY"))
+      System.getenv("LICENSE_KEY")?.takeIf { it.isNotBlank() }?.let { setLicense(it) }
       PluginConfigurator(this).installPluginFromPath(pluginPath)
     }.runIdeWithDriver().useDriverAndCloseIde {
       waitForIndicators(5.minutes)
