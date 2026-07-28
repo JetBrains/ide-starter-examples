@@ -81,7 +81,7 @@ class PluginTest {
   fun pluginActionInvocation(splitMode: Boolean) {
     ConfigurationStorage.splitMode(splitMode)
 
-    Starter.newContext(CurrentTestMethod.hyphenateWithClass(),
+    Starter.newContext(CurrentTestMethod.hyphenateWithClass() + if (splitMode) "-split" else "",
                        TestCase(IdeInfo.IdeaUltimate,
                                 GitHubProject.fromGithub(branchName = "master",
                                                          repoRelativeUrl = "JetBrains/ij-perf-report-aggregator"))
