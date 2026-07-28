@@ -36,7 +36,7 @@ class UiTestWithDriver {
     ConfigurationStorage.splitMode(splitMode)
 
     val testContext = Starter
-      .newContext(CurrentTestMethod.hyphenateWithClass(), TestCase(IdeInfo.IdeaUltimate, GitHubProject.fromGithub(
+      .newContext(CurrentTestMethod.hyphenateWithClass() + if (splitMode) "-split" else "", TestCase(IdeInfo.IdeaUltimate, GitHubProject.fromGithub(
         branchName = "master",
         repoRelativeUrl = "Perfecto-Quantum/Quantum-Starter-Kit.git",
         commitHash = "1dc6128c115cb41fc442c088174e81f63406fad5"
