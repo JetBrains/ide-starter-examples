@@ -61,7 +61,7 @@ class PluginTest {
             }.present()
           }
           // This one basically the same, but one-liner via existing API
-          listPluginComponent(pluginName).waitFound().enabledCheckBox.waitFound()
+          getPluginFromList(pluginName).enabledCheckBox.waitFound()
         }
       }
     }
