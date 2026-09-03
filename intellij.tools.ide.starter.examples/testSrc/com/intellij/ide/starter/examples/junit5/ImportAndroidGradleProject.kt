@@ -27,7 +27,7 @@ class ImportAndroidGradleProject {
       .prepareProjectCleanImport()
       .apply {
         withFramework<AndroidFramework>().setupAndroidSdkToProject(
-          AndroidFramework.downloadLatestAndroidSdk(JdkDownloaderFacade.jdk11.home))
+          AndroidFramework.downloadAndroidSdk(JdkDownloaderFacade.jdk11.home))
       }
 
 
