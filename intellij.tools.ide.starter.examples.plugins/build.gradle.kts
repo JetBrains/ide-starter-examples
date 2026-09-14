@@ -71,6 +71,12 @@ val integrationTest by intellijPlatformTesting.testIdeUi.registering {
     useJUnitPlatform()
     dependsOn(tasks.prepareSandbox)
 
+    // Workaround: MultiRoutingFsPath implements sun.nio.fs.BasicFileAttributesHolder, so
+    // resolving the class (e.g. from EelNioFsBackendImpl.resolveDescriptor reached via
+    // Decompressor → ArchiveBackend ServiceLoader) requires --add-opens on JDK 17+.
+    // IJPL-244221.
+    jvmArgs("--add-opens=java.base/sun.nio.fs=ALL-UNNAMED")
+
     // Make test execution visible in console
     testLogging {
       events("passed", "skipped", "failed")
