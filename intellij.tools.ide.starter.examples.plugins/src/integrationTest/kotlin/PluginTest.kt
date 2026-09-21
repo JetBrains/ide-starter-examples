@@ -2,11 +2,11 @@ import com.intellij.driver.sdk.invokeAction
 import com.intellij.driver.sdk.openFile
 import com.intellij.driver.sdk.ui.components.UiComponent.Companion.waitFound
 import com.intellij.driver.sdk.ui.components.common.ideFrame
-import com.intellij.driver.sdk.ui.components.common.welcomeScreen
 import com.intellij.driver.sdk.ui.components.elements.button
 import com.intellij.driver.sdk.ui.components.elements.dialog
 import com.intellij.driver.sdk.ui.components.elements.waitForNoOpenedDialogs
-import com.intellij.driver.sdk.ui.components.settings.pluginsPage
+import com.intellij.driver.sdk.ui.components.settings.openPluginsSettings
+import com.intellij.driver.sdk.ui.components.settings.pluginsSettingsPage
 import com.intellij.driver.sdk.ui.shouldBe
 import com.intellij.driver.sdk.waitForIndicators
 import com.intellij.ide.starter.config.ConfigurationStorage
@@ -46,9 +46,9 @@ class PluginTest {
     Starter.newContext(CurrentTestMethod.hyphenateWithClass(), TestCase(IdeInfo.IdeaUltimate, NoProject)).apply {
       PluginConfigurator(this).installPluginFromPath(pluginPath)
     }.runIdeWithDriver().useDriverAndCloseIde {
-      welcomeScreen {
-        clickPlugins()
-        pluginsPage {
+      ideFrame {
+        openPluginsSettings()
+        pluginsSettingsPage {
           installedTab.click()
           searchPluginTextField.text = pluginName
           //This example is here to showcase the use of the DSL
@@ -61,7 +61,9 @@ class PluginTest {
             }.present()
           }
           // This one basically the same, but one-liner via existing API
-          getPluginFromList(pluginName).enabledCheckBox.waitFound()
+          shouldBe("Plugin is enabled") {
+            getPluginFromList(pluginName).getPluginDescriptor().isEnabled()
+          }
         }
       }
     }
