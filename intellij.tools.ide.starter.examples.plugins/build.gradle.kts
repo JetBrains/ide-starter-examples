@@ -43,8 +43,6 @@ dependencies {
   integrationTestRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
   testImplementation("com.jetbrains.intellij.tools:ide-starter-product-idea-ultimate:LATEST-EAP-SNAPSHOT")
-
-  integrationTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.1")
 }
 
 intellijPlatform {

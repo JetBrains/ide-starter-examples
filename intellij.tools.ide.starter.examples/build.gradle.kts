@@ -53,7 +53,6 @@ dependencies {
 
   // Other utilities used by tests
   testImplementation("org.kodein.di:kodein-di-jvm:7.20.2")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.1")
   testImplementation("com.fasterxml.jackson.core:jackson-databind:2.16.0")
 
   // FUS reporting
