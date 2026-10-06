@@ -45,8 +45,8 @@ dependencies {
   testImplementation("com.jetbrains.intellij.driver:driver-sdk:LATEST-EAP-SNAPSHOT")
   testImplementation("com.jetbrains.intellij.driver:driver-model:LATEST-EAP-SNAPSHOT")
 
-  // JUnit 5 via BOM
-  val junitBom = platform("org.junit:junit-bom:5.12.2")
+  // JUnit via BOM
+  val junitBom = platform("org.junit:junit-bom:6.1.3")
   testImplementation(junitBom)
   testImplementation("org.junit.jupiter:junit-jupiter")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")

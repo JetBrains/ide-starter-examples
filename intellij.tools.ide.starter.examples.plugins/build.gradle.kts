@@ -37,7 +37,7 @@ dependencies {
   testRuntimeOnly(kotlin("stdlib"))
   testRuntimeOnly(kotlin("reflect"))
 
-  val junitBom = platform("org.junit:junit-bom:5.10.3")
+  val junitBom = platform("org.junit:junit-bom:6.1.3")
   integrationTestImplementation(junitBom)
   integrationTestImplementation("org.junit.jupiter:junit-jupiter")
   integrationTestRuntimeOnly("org.junit.platform:junit-platform-launcher")
