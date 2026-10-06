@@ -8,7 +8,7 @@ import org.junit.jupiter.api.extension.TestExecutionExceptionHandler
 
 class EapLicenseHelper : TestExecutionExceptionHandler {
 
-  override fun handleTestExecutionException(context: ExtensionContext?, throwable: Throwable?) {
+  override fun handleTestExecutionException(context: ExtensionContext, throwable: Throwable) {
     if (throwable is SetupException) {
       if (throwable.message!!.contains(regex = Regex("EAP build.*expired"))) {
         logOutput("Skipping the test because the EAP build has expired")
@@ -18,6 +18,6 @@ class EapLicenseHelper : TestExecutionExceptionHandler {
         throw throwable
       }
     }
-    else throwable?.let { throw it }
+    else throw throwable
   }
 }
