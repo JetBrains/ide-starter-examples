@@ -7,10 +7,11 @@ import com.intellij.tools.ide.starter.product.idea.ultimate.IdeaUltimate
 
 object IdeaUltimateCases : TestCaseTemplate(IdeInfo.IdeaUltimate) {
 
-  val GradleJitPackSimple = withProject(
+  val GradleBuildScanQuickstart = withProject(
     GitHubProject.fromGithub(
-      branchName = "master",
-      repoRelativeUrl = "jitpack/gradle-simple.git"
+      branchName = "main",
+      repoRelativeUrl = "gradle/gradle-build-scan-quickstart.git",
+      commitHash = "8c2b1b6c5cbf781dc3399e3eb58da37ec256ddaa"
     )
   )
 

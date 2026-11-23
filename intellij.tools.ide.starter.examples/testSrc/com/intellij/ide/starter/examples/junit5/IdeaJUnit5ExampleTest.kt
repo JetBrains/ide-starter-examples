@@ -16,10 +16,10 @@ import org.junit.jupiter.api.Test
 
 class IdeaJUnit5ExampleTest {
   @Test
-  fun openGradleJitPack() {
+  fun openGradleProject() {
 
     val testContext = Starter
-      .newContext(CurrentTestMethod.hyphenateWithClass(), IdeaUltimateCases.GradleJitPackSimple)
+      .newContext(CurrentTestMethod.hyphenateWithClass(), IdeaUltimateCases.GradleBuildScanQuickstart)
       .prepareProjectCleanImport()
 
     val exitCommandChain = CommandChain().exitApp()

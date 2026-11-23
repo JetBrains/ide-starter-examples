@@ -22,9 +22,9 @@ class StartupPerformanceTest {
   @Test
   fun testStartupPerformance() {
     var pathToStats: Path? = null
-    val context = Starter.newContext(CurrentTestMethod.getName(), IdeaUltimateCases.GradleJitPackSimple)
+    val context = Starter.newContext(CurrentTestMethod.getName(), IdeaUltimateCases.GradleBuildScanQuickstart)
 
-    context.runIDE(commands = CommandChain().importGradleProject().waitForSmartMode().openFile("src/main/java/Hello.java").exitApp(),
+    context.runIDE(commands = CommandChain().importGradleProject().waitForSmartMode().openFile("src/main/java/example/Example.java").exitApp(),
                    runTimeout = 10.minutes,
                    launchName = "warmup")
     context
