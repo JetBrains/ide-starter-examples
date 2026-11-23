@@ -19,7 +19,7 @@ class IdeaJUnit5ExampleTest {
   fun openGradleProject() {
 
     val testContext = Starter
-      .newContext(CurrentTestMethod.hyphenateWithClass(), IdeaUltimateCases.GradleBuildScanQuickstart)
+      .newContext(CurrentTestMethod.hyphenateWithClass(), IdeaUltimateCases.GradleJUnitStarter)
       .prepareProjectCleanImport()
 
     val exitCommandChain = CommandChain().exitApp()

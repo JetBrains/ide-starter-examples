@@ -18,11 +18,11 @@ class PerfTestWithDriver {
   @Test
   fun openGradleProject() {
     val testContext = Starter
-      .newContext(CurrentTestMethod.hyphenateWithClass(), IdeaUltimateCases.GradleBuildScanQuickstart)
+      .newContext(CurrentTestMethod.hyphenateWithClass(), IdeaUltimateCases.GradleJUnitStarter)
       .prepareProjectCleanImport()
 
     testContext.runIdeWithDriver().useDriverAndCloseIde {
-      execute(CommandChain().openFile("build.gradle.kts")) //invocation of command via JMX call
+      execute(CommandChain().openFile("build.gradle")) //invocation of command via JMX call
       assertEquals(1, getOpenProjects().size) // JMX call using predefined interfaces
       assertEquals(service<LafManager>().getCurrentUIThemeLookAndFeel().getName(), "Islands Dark") //JMX call with custom interfaces
     }
